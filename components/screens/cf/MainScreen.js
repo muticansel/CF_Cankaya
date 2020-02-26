@@ -35,9 +35,7 @@ const MainScreen = props => {
         return (
             <CategoryGrid title={itemData.item.name}
                 color={itemData.item.color}
-                onSelect={() => props.navigation.navigate('MainScreen', {
-                    categoryId: itemData.item.id
-                })} />
+                onSelect={() => props.navigation.navigate('Profile')} />
         )
     }
 

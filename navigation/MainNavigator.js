@@ -1,10 +1,10 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { AuthStackNavigator } from './StackNavigators';
-import { AppBaseDrawerNav } from './DrawerNavigator';
+import { CfCankayaNav } from './DrawerNavigator';
 
 const SwitchNavigator = createSwitchNavigator({
     Auth: AuthStackNavigator,
-    CFCankaya: AppBaseDrawerNav
+    CFCankaya: CfCankayaNav
 })
 
 export default createAppContainer(SwitchNavigator);

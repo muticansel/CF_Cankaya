@@ -5,7 +5,7 @@ import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-dr
 
 import Colors from '../constants/colors';
 import * as authActions from '../store/actions/auth';
-import { AdminStackNavigator, CFNavigator } from './StackNavigators';
+import { CFNavigator, ProfileStackNav } from './StackNavigators';
 
 const drawerOption = {
     contentOptions: {
@@ -53,11 +53,17 @@ const drawerOption = {
 //     }
 // }, drawerOption)
 
-export const AppBaseDrawerNav = createDrawerNavigator({
-    SelectBase: {
+export const CfCankayaNav = createDrawerNavigator({
+    MainScreen: {
         screen: CFNavigator,
         navigationOptions: {
             drawerLabel: "Main Screen"
+        }
+    },
+    Profile: {
+        screen: ProfileStackNav,
+        navigationOptions: {
+            drawerLabel: "Profile"
         }
     }
 }, drawerOption)
