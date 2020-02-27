@@ -1,33 +1,26 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Text, Button, DatePicker } from 'native-base'
+import { useDispatch, useSelector } from 'react-redux';
+import { Text, Button, DatePicker } from 'native-base';
+
+import * as userActions from '../../../store/actions/user';
 
 const ProfileScreen = props => {
-    const user = undefined
+    const userId = useSelector(state => state.authReducer.userId);
+    const profiles = useSelector(state => state.userReducer.profiles)
+    const profile = profiles.find(prof => prof.userId === userId)
 
     const dispatch = useDispatch();
-    const [name, setName] = useState(user ? user.name : '');
-    const [surname, setSurname] = useState(user ? user.surname : '');
-    const [startDate, setStartDate] = useState(user ? user.startDate : '')
-    const [endDate, setEndDate] = useState(user ? user.endDate : '')
+    const [name, setName] = useState(profile ? profile.name : '');
+    const [surname, setSurname] = useState(profile ? profile.surname : '');
+    const [startDate, setStartDate] = useState(profile ? profile.startDate : '')
+    const [endDate, setEndDate] = useState(profile ? profile.endDate : '')
 
-    const submitHandler = useCallback(() => {
-        if (editedMeal) {
-            // dispatch(
-            //     userActions.updateMeal(mealId, title, duration, [category], ingredients, steps)
-            // );
-        } else {
-            // dispatch(
-            //     mealActions.createMeal(title, duration, [category], ingredients, steps, "")
-            // );
-        }
-        props.navigation.goBack();
-    }, [dispatch, name, surname]);
-
-    useEffect(() => {
-        props.navigation.setParams({ submit: submitHandler });
-    }, [submitHandler]);
+    const saveProfile = () => {
+        const profile = profiles.find(profile => profile.userId === userId)
+        dispatch(userActions.updateProfile(profile.id, name, surname, startDate, endDate));
+        props.navigation.navigate("MainScreen")
+    }
 
     return (
         <View style={styles.form}>
@@ -49,13 +42,12 @@ const ProfileScreen = props => {
             </View>
             <View style={styles.formControl}>
                 <Text style={styles.label}>Start Date</Text>
-                <DatePicker defaultDate={startDate}
+                <DatePicker defaultDate={new Date(startDate)}
                     minimumDate={new Date(2020, 1, 1)}
                     locale={"en"}
                     modalTransparent={false}
                     animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText="Select date"
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{ color: "green" }}
                     onDateChange={val => setStartDate(val)}
@@ -64,19 +56,21 @@ const ProfileScreen = props => {
             </View>
             <View style={styles.formControl}>
                 <Text style={styles.label}>End Date</Text>
-                <DatePicker defaultDate={endDate}
-                    minimumDate={startDate}
+                <DatePicker defaultDate={endDate ? new Date(endDate) : null}
+                    minimumDate={startDate ? new Date(startDate) : undefined}
                     locale={"en"}
                     modalTransparent={false}
                     animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText={!startDate ? "First select start date" : "Select date"}
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{ color: "green" }}
                     onDateChange={val => setEndDate(val)}
                     disabled={!startDate}
                 />
             </View>
+            <Button success block onPress={saveProfile}>
+                <Text>Save</Text>
+            </Button>
         </View>
     )
 }

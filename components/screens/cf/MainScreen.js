@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, FlatList, ActivityIndicator, View, Button } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import { useDispatch } from 'react-redux'
 import CategoryGrid from '../../UI/CategoryGrid';
 
@@ -7,29 +7,30 @@ import Constants from '../../../constants/constants';
 import DrawerButton from '../../UI/HeaderDrawerButton';
 // import DefaultText from '../../UI/DefaultText';
 import Colors from '../../../constants/colors';
+import * as userActions from '../../../store/actions/user';
 
 
 const MainScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch()
 
-    // const loadFilms = useCallback(async () => {
-    //     setIsLoading(true);
-    //     await dispatch(filmActions.fetchFilms())
-    //     setIsLoading(false);
-    // }, [dispatch, setIsLoading])
+    const loadProfiles = useCallback(async () => {
+        setIsLoading(true);
+        await dispatch(userActions.fetchProfiles())
+        setIsLoading(false);
+    }, [dispatch, setIsLoading])
 
-    // useEffect(() => {
-    //     loadFilms()
-    // }, [dispatch, loadFilms])
+    useEffect(() => {
+        loadProfiles()
+    }, [dispatch, loadProfiles])
 
-    // useEffect(() => {
-    //     const willFocusSub = props.navigation.addListener('willFocus', loadFilms);
+    useEffect(() => {
+        const willFocusSub = props.navigation.addListener('willFocus', loadProfiles);
 
-    //     return () => {
-    //         willFocusSub.remove()
-    //     }
-    // }, [loadFilms])
+        return () => {
+            willFocusSub.remove()
+        }
+    }, [loadProfiles])
 
     const renderGridItem = itemData => {
         return (
