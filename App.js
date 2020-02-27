@@ -10,12 +10,14 @@ import { enableScreens } from 'react-native-screens';
 
 import MainNav from './navigation/MainNavigator';
 import authReducer from './store/reducers/auth';
+import userReducer from './store/reducers/user';
 
 enableScreens();
 
 const rootReducer = combineReducers({
   //filmReducer: filmReducer,
-  authReducer: authReducer
+  authReducer: authReducer,
+  userReducer: userReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

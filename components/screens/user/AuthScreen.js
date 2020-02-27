@@ -16,6 +16,7 @@ import Input from '../../UI/Input';
 import Card from '../../UI/Card';
 import Colors from '../../../constants/colors';
 import * as authActions from '../../../store/actions/auth';
+import * as userActions from '../../../store/actions/user';
 import PrivConstants from '../../../privConstants/constants';
 import firebase from '../../../config/firebase'
 
@@ -89,6 +90,10 @@ const AuthScreen = props => {
         setIsLoading(true);
         try {
             await dispatch(action);
+            if(isSignup) {
+                await dispatch(userActions.createProfile())
+            }
+
             props.navigation.navigate('CFCankaya')
         } catch (err) {
             setError(err.message);

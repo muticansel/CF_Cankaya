@@ -81,6 +81,12 @@ const ProfileScreen = props => {
     )
 }
 
+ProfileScreen.navigationOptions = navData => {
+    return {
+        headerTitle: 'Profile'
+    }
+}
+
 const styles = StyleSheet.create({
     form: {
         margin: 20
