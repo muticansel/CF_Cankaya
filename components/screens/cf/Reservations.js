@@ -4,6 +4,7 @@ import { Card, CardItem } from 'native-base'
 
 import Constants from '../../../constants/constants';
 import DrawerButton from '../../UI/HeaderDrawerButton';
+import Colors from '../../../constants/colors';
 
 const Reservations = props => {
     return (
@@ -38,10 +39,14 @@ const styles = StyleSheet.create({
     },
     cardStyle: {
         width: '95%',
+        borderWidth: 1,
+        borderRadius: 20
     },
     cardItem: {
-        backgroundColor: '#B0B0B0',
-        justifyContent: 'center'
+        backgroundColor: Colors.primary,
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 20
     }
 })
 

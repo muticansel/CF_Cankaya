@@ -21,6 +21,7 @@ export default {
             color: "#368dff"
         }
     ],
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     reservations: [
         {
             id: "monday",
