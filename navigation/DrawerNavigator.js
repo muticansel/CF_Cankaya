@@ -5,7 +5,8 @@ import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-dr
 
 import Colors from '../constants/colors';
 import * as authActions from '../store/actions/auth';
-import { CFNavigator, ProfileStackNav } from './StackNavigators';
+import { CFNavigator, ProfileStackNav, WodsStackNav } from './StackNavigators';
+import { WodsTabNavigator } from './TabNavigators';
 
 const drawerOption = {
     contentOptions: {
@@ -58,6 +59,12 @@ export const CfCankayaNav = createDrawerNavigator({
         screen: CFNavigator,
         navigationOptions: {
             drawerLabel: "Main Screen"
+        }
+    },
+    Wods: {
+        screen: WodsTabNavigator,
+        navigationOptions: {
+            drawerLabel: "Wods of Weeks"
         }
     },
     Profile: {

@@ -6,6 +6,8 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import AuthScreen from '../components/screens/user/AuthScreen';
 import MainScreen from '../components/screens/cf/MainScreen';
 import Profile from '../components/screens/user/Profile';
+import Reservations from '../components/screens/cf/Reservations';
+import Wods from '../components/screens/cf/Wods';
 
 const defaultNavOpt = {
     headerTitleAlign: 'center'
@@ -13,23 +15,41 @@ const defaultNavOpt = {
 
 export const CFNavigator = createStackNavigator({
     CF_Cankaya: MainScreen
-}, { 
+}, {
     defaultNavigationOptions: defaultNavOpt
- })
+})
 
- export const ProfileStackNav = createStackNavigator(
-     {
+export const ProfileStackNav = createStackNavigator(
+    {
         ProfileScreen: Profile
-     },
-     {
+    },
+    {
         defaultNavigationOptions: defaultNavOpt
-     }
- )
+    }
+)
+
+export const ReservationsStackNav = createStackNavigator(
+    {
+        Reservations: Reservations
+    },
+    {
+        defaultNavigationOptions: defaultNavOpt
+    }
+)
+
+export const WodsStackNav = createStackNavigator(
+    {
+        Wods: Wods
+    },
+    {
+        defaultNavigationOptions: defaultNavOpt
+    }
+)
 
 export const AuthStackNavigator = createStackNavigator({
     Auth: AuthScreen
-}, { 
+}, {
     defaultNavigationOptions: {
         headerTitleAlign: 'center'
     }
- })
+})
