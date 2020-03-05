@@ -9,6 +9,7 @@ import Profile from '../components/screens/user/Profile';
 import Reservations from '../components/screens/cf/Reservations';
 import Wods from '../components/screens/cf/Wods';
 import WodPage from '../components/screens/cf/WodPage';
+import NewWod from '../components/screens/cf/NewWod';
 
 const defaultNavOpt = {
     headerTitleAlign: 'center'
@@ -41,7 +42,8 @@ export const ReservationsStackNav = createStackNavigator(
 export const WodsStackNav = createStackNavigator(
     {
         Wods: Wods,
-        WodDetail: WodPage
+        WodDetail: WodPage,
+        NewWod: NewWod
     },
     {
         defaultNavigationOptions: defaultNavOpt

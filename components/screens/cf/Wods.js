@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { Card, CardItem } from 'native-base'
+import { Card, CardItem } from 'native-base';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+import HeaderButton from '../../UI/HeaderButton';
 
 import Constants from '../../../constants/constants';
 import DrawerButton from '../../UI/HeaderDrawerButton';
@@ -18,7 +21,7 @@ const Wods = props => {
             {Constants.reservations.map((wod, index) => {
                 return (
                     <Card style={styles.cardStyle} key={wod.day}>
-                        <CardItem style={styles.cardItem} button onPress={() => goToWodDetail((index+1) % 7)} >
+                        <CardItem style={styles.cardItem} button onPress={() => goToWodDetail((index + 1) % 7)} >
                             <Text>{wod.day}</Text>
                         </CardItem>
                     </Card>
@@ -32,7 +35,20 @@ Wods.navigationOptions = navData => {
     return {
         headerLeft: () => <DrawerButton toggleDrawerHandler={() => {
             navData.navigation.toggleDrawer()
-        }} />
+        }} />,
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                    title="Save"
+                    iconName={
+                        Platform.OS === 'android' ? 'ios-add' : 'ios-add-circle'
+                    }
+                    onPress={() => {
+                        navData.navigation.navigate('NewWod')
+                    }}
+                />
+            </HeaderButtons>
+        )
     }
 }
 
