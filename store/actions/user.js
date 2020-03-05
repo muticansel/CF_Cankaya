@@ -4,6 +4,8 @@ export const SET_PROFILES = 'SET_PROFILES'
 
 export const fetchProfiles = () => {
     return async (dispatch, getState) => {
+        const userId = getState().authReducer.userId;
+
         const response = await fetch(
             'https://cf-cankaya.firebaseio.com/profiles.json'
         );
@@ -18,12 +20,14 @@ export const fetchProfiles = () => {
                 surname: resData[key].surname,
                 startDate: resData[key].startDate,
                 endDate: resData[key].endDate,
-                userId: resData[key].userId
+                userId: resData[key].userId,
+                isAdmin: resData[key].isAdmin,
+                isCoach: resData[key].isCoach
             }
             loadedProfiles.push(profile)
         }
 
-        dispatch({ type: SET_PROFILES, profiles: loadedProfiles })
+        dispatch({ type: SET_PROFILES, profiles: loadedProfiles, userId: userId })
 
     }
 }

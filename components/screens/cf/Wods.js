@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { Card, CardItem } from 'native-base';
+import { useSelector } from 'react-redux'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../UI/HeaderButton';
@@ -10,11 +11,17 @@ import DrawerButton from '../../UI/HeaderDrawerButton';
 import Colors from '../../../constants/colors';
 
 const Wods = props => {
+    const userProfile = useSelector(state => state.userReducer.userProfile);
+
     const goToWodDetail = (ind) => {
         props.navigation.navigate('WodDetail', {
             dayIndex: ind
         })
     }
+
+    useEffect(() => {
+        props.navigation.setParams({ userProfile: userProfile });
+    }, [userProfile]);
 
     return (
         <View style={styles.mainContainer}>
@@ -32,11 +39,13 @@ const Wods = props => {
 }
 
 Wods.navigationOptions = navData => {
+    const userProfile = navData.navigation.getParam('userProfile');
+
     return {
         headerLeft: () => <DrawerButton toggleDrawerHandler={() => {
             navData.navigation.toggleDrawer()
         }} />,
-        headerRight: () => (
+        headerRight: () => (userProfile && userProfile.isAdmin) ? (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                     title="Save"
@@ -48,7 +57,7 @@ Wods.navigationOptions = navData => {
                     }}
                 />
             </HeaderButtons>
-        )
+        ) : null
     }
 }
 

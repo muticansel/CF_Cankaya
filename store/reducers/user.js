@@ -1,6 +1,7 @@
 import { CREATE_PROFILE, UPDATE_PROFILE, SET_PROFILES } from '../actions/user';
 
 const initialState = {
+    userProfile: null,
     profiles: []
 }
 
@@ -9,7 +10,8 @@ const userReducer = (state = initialState, action) => {
         case SET_PROFILES:
             return {
                 ...state,
-                profiles: action.profiles
+                profiles: action.profiles,
+                userProfile: action.profiles.find(profile => profile.userId === action.userId)
             }
         case CREATE_PROFILE:
             const newProfile = {
