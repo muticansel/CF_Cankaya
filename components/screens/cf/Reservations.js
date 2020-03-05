@@ -1,24 +1,43 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { Card, CardItem } from 'native-base'
+import { StyleSheet, Text, FlatList } from 'react-native';
+import { Card, CardItem, Content, Left, Body, Container, Button, Icon } from 'native-base'
 
 import Constants from '../../../constants/constants';
 import DrawerButton from '../../UI/HeaderDrawerButton';
-import Colors from '../../../constants/colors';
+
 
 const Reservations = props => {
-    return (
-        <View style={styles.mainContainer}>
-            {Constants.reservations.map(wod => {
-                return (
-                    <Card style={styles.cardStyle} key={wod.day}>
-                        <CardItem style={styles.cardItem} button onPress={() => props.navigation.navigate('Profile')} >
-                            <Text>{wod.day}</Text>
+    const renderReservationItem = itemData => {
+        return (
+            <Container style={{ width: '100%', height: '10%' }}>
+                <Content>
+                    <Card>
+                        <CardItem>
+                            <Left>
+                                {/* <Thumbnail source={{ uri: '' }} /> */}
+                                <Body>
+                                    <Text style={{ fontSize: 26 }}>{itemData.item.day}</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem>
+                            <Left>
+                                <Button transparent>
+                                    <Icon type="FontAwesome" name="bell" />
+                                    <Text> 5 Wod(Wod Count)</Text>
+                                </Button>
+                            </Left>
                         </CardItem>
                     </Card>
-                )
-            })}
-        </View>
+                </Content>
+            </Container>
+        )
+    }
+
+    return (
+        <FlatList numColumns={1}
+            renderItem={renderReservationItem}
+            data={Constants.reservations} />
     )
 }
 
@@ -36,17 +55,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    cardStyle: {
-        width: '95%',
-        borderWidth: 1,
-        borderRadius: 20
-    },
-    cardItem: {
-        backgroundColor: Colors.primary,
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderRadius: 20
     }
 })
 
