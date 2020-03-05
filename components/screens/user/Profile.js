@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Button, DatePicker } from 'native-base';
+import { Text, Button, DatePicker, CheckBox, Body, ListItem } from 'native-base';
 
 import * as userActions from '../../../store/actions/user';
 
@@ -15,10 +15,12 @@ const ProfileScreen = props => {
     const [surname, setSurname] = useState(profile ? profile.surname : '');
     const [startDate, setStartDate] = useState(profile ? profile.startDate : '')
     const [endDate, setEndDate] = useState(profile ? profile.endDate : '')
+    const [admin, setAdmin] = useState(profile ? profile.isAdmin : false)
+    const [coach, setCoach] = useState(profile ? profile.isCoach : false)
 
     const saveProfile = () => {
         const profile = profiles.find(profile => profile.userId === userId)
-        dispatch(userActions.updateProfile(profile.id, name, surname, startDate, endDate));
+        dispatch(userActions.updateProfile(profile.id, name, surname, startDate, endDate, admin, coach));
         props.navigation.navigate("MainScreen")
     }
 
@@ -68,6 +70,18 @@ const ProfileScreen = props => {
                     disabled={!startDate}
                 />
             </View>
+            <View style={styles.formControl}>
+                <ListItem>
+                    <CheckBox checked={admin} onPress={() => setAdmin(prev => !prev)} color="green" />
+                    <Body>
+                        <Text>Is Admin?</Text>
+                    </Body>
+                    <CheckBox checked={coach} onPress={() => setCoach(prev => !prev)} color="green" />
+                    <Body>
+                        <Text>Is Coach?</Text>
+                    </Body>
+                </ListItem>
+            </View>
             <Button success block onPress={saveProfile}>
                 <Text>Save</Text>
             </Button>
@@ -86,11 +100,16 @@ const styles = StyleSheet.create({
         margin: 20
     },
     formControl: {
-        width: '100%'
+        width: '100%',
+        marginVertical: 8
+    },
+    formControlRow: {
+        width: '100%',
+        marginVertical: 8,
+        flexDirection: 'row'
     },
     label: {
-        fontFamily: 'open-sans-bold',
-        marginVertical: 8
+        fontFamily: 'open-sans-bold'
     },
     input: {
         paddingHorizontal: 2,

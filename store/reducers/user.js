@@ -28,7 +28,9 @@ const userReducer = (state = initialState, action) => {
                 surname: action.profileData.surname,
                 startDate: action.profileData.startDate,
                 endDate: action.profileData.endDate,
-                userId: action.userId
+                userId: action.userId,
+                isAdmin: action.isAdmin,
+                isCoach: action.isCoach
             };
 
             const updatedProfiles = [...state.profiles];

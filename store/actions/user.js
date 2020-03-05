@@ -54,7 +54,7 @@ export const createProfile = () => {
     }
 }
 
-export const updateProfile = (id, name, surname, startDate, endDate) => {
+export const updateProfile = (id, name, surname, startDate, endDate, isAdmin, isCoach) => {
     return async (dispatch, getState) => {
         const token = getState().authReducer.token;
         const userId = getState().authReducer.userId;
@@ -68,7 +68,9 @@ export const updateProfile = (id, name, surname, startDate, endDate) => {
                 name,
                 surname, 
                 startDate,
-                endDate
+                endDate,
+                isAdmin,
+                isCoach
             })
         })
 
@@ -82,7 +84,9 @@ export const updateProfile = (id, name, surname, startDate, endDate) => {
                 name,
                 surname,
                 startDate,
-                endDate
+                endDate,
+                isAdmin,
+                isCoach
             }
         })
     }
