@@ -7,6 +7,7 @@ import AuthScreen from '../components/screens/user/AuthScreen';
 import MainScreen from '../components/screens/cf/MainScreen';
 import Profile from '../components/screens/user/Profile';
 import Reservations from '../components/screens/cf/Reservations';
+import DailyReservations from '../components/screens/cf/DailyReservations';
 import Wods from '../components/screens/cf/Wods';
 import WodPage from '../components/screens/cf/WodPage';
 import NewWod from '../components/screens/cf/NewWod';
@@ -32,7 +33,8 @@ export const ProfileStackNav = createStackNavigator(
 
 export const ReservationsStackNav = createStackNavigator(
     {
-        Reservations: Reservations
+        Reservations: Reservations,
+        DailyReservations: DailyReservations
     },
     {
         defaultNavigationOptions: defaultNavOpt
