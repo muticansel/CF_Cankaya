@@ -35,7 +35,7 @@ export default {
                 {
                     hour: "18:00",
                     coach: "Çağaş Kuru",
-                    participantCount: 12
+                    participantCount: 1
                 },
                 {
                     hour: "18:30",
